@@ -37,7 +37,7 @@ Se preferir usar o `conda`, você pode instalar as bibliotecas da seguinte forma
 ```bash
 conda install numpy
 conda install matplotlib
-conda install -c conda-forge svgpathtools
+conda install conda-forge::svgpathtools
 ```
 
 ## Executando o Projeto
