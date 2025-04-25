@@ -98,15 +98,25 @@ def update(frame):
 
 # Definindo os pontos fixos A(0, 0) e B(100, 0)
 A = np.array([0, 0])  # Ponto A
-B = np.array([100, 0])  # Ponto B
+B = np.array([243.2, 0])  # Ponto B
 
-# Definindo os vértices do triângulo
-t1 = np.array([50, -20])  # Vértice t1
-t2 = np.array([75, -65])  # Vértice t2
-t3 = np.array([25, -65])  # Vértice t3
+centro = (243.2/2, -100) 
+
+# Triângulo equilátero com lado 150
+lado = 150
+R = lado / np.sqrt(3)  # Raio do círculo circunscrito ao triângulo
+
+# Ângulos dos vértices do triângulo
+angulo_base = np.pi / 2  # Orientação "em pé"
+angulos_triangulo = angulo_base + np.array([0, 2*np.pi/3, 4*np.pi/3])
+
+# Cálculo dos vértices (mantendo os nomes t1, t2, t3)
+t1 = np.array([centro[0] + R * np.cos(angulos_triangulo[0]), centro[1] + R * np.sin(angulos_triangulo[0])])
+t2 = np.array([centro[0] + R * np.cos(angulos_triangulo[1]), centro[1] + R * np.sin(angulos_triangulo[1])])
+t3 = np.array([centro[0] + R * np.cos(angulos_triangulo[2]), centro[1] + R * np.sin(angulos_triangulo[2])])
 
 # Gerando os pontos de cada lado do triângulo (discretizando os lados)
-num_pontos = 20
+num_pontos = 40
 pontos_t1_t2 = discretizar_lado(t1, t2, num_pontos)
 pontos_t2_t3 = discretizar_lado(t2, t3, num_pontos)
 pontos_t3_t1 = discretizar_lado(t3, t1, num_pontos)
@@ -122,8 +132,8 @@ r1_vals, r2_vals = [], []
 fig, (ax_main, ax_r1, ax_r2) = plt.subplots(1, 3, figsize=(15, 5))
 
 # Configuração do gráfico principal
-ax_main.set_xlim(-30, 130)
-ax_main.set_ylim(-100, 10)
+ax_main.set_xlim(-10, 260)
+ax_main.set_ylim(-250, 10)
 ax_main.set_aspect('equal', 'box')
 ax_main.set_title("Trajetória Triângulo PI7")
 ax_main.set_xlabel("X")
@@ -131,11 +141,11 @@ ax_main.set_ylabel("Y")
 ax_main.grid(True)
 
 # Plotando os pontos A, B e os vértices t1, t2, t3 do triângulo
-ax_main.plot(A[0], A[1], 'go', label='A (0, 0)')
-ax_main.plot(B[0], B[1], 'bo', label='B (100, 0)')
-ax_main.plot(t1[0], t1[1], 'ro', label='t1 (50, -20)')
-ax_main.plot(t2[0], t2[1], 'ro', label='t2 (75, -45)')
-ax_main.plot(t3[0], t3[1], 'ro', label='t3 (25, -45)')
+ax_main.plot(A[0], A[1], 'go', label='A')
+ax_main.plot(B[0], B[1], 'bo', label='B')
+ax_main.plot(t1[0], t1[1], 'ro', label='t1')
+ax_main.plot(t2[0], t2[1], 'ro', label='t2')
+ax_main.plot(t3[0], t3[1], 'ro', label='t3')
 
 # Inicializando o ponto C, o rastro e os segmentos AC e BC
 ponto_C_plot, = ax_main.plot([], [], 'mo', label='Ponto C')

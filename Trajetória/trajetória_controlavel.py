@@ -70,12 +70,12 @@ def apagar_desenho(event):
 
 # Definindo os pontos A e B
 A = np.array([0, 0])
-B = np.array([100, 0])
+B = np.array([243.2, 0])
 
 # Inicializando a figura e os eixos
 fig, ax = plt.subplots(figsize=(8, 6))
-ax.set_xlim(-10, 110)
-ax.set_ylim(-80, 10)  # Limite do eixo Y ajustado
+ax.set_xlim(-10, 260)
+ax.set_ylim(-250, 10)
 ax.set_aspect('equal', 'box')
 ax.set_title("Simulação Trajetória PI7")
 
@@ -83,8 +83,8 @@ ax.set_title("Simulação Trajetória PI7")
 ax.grid(True)
 
 # Plotando os pontos A e B
-ax.plot(A[0], A[1], 'go', label='A (0, 0)')
-ax.plot(B[0], B[1], 'bo', label='B (100, 0)')
+ax.plot(A[0], A[1], 'go', label='A')
+ax.plot(B[0], B[1], 'bo', label='B')
 
 # Inicializando os segmentos AC e BC
 linha_AC, = ax.plot([], [], 'r-', label='Segmento AC')
@@ -101,11 +101,11 @@ rastros = []
 
 # Adicionando os sliders para r1 e r2
 ax_r1 = plt.axes([0.15, 0.02, 0.65, 0.03], facecolor='lightgoldenrodyellow')
-slider_r1 = Slider(ax_r1, 'Tamanho L1', 1.0, 100.0, valinit=50.0)
+slider_r1 = Slider(ax_r1, 'Tamanho L1', 1.0, 243.2, valinit=125.0)
 slider_r1.on_changed(update)
 
 ax_r2 = plt.axes([0.15, 0.06, 0.65, 0.03], facecolor='lightgoldenrodyellow')
-slider_r2 = Slider(ax_r2, 'Tamanho L2', 1.0, 100.0, valinit=50.0)
+slider_r2 = Slider(ax_r2, 'Tamanho L2', 1.0, 243.2, valinit=125.0)
 slider_r2.on_changed(update)
 
 # Adicionando o botão para apagar o desenho

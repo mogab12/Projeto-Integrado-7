@@ -12,16 +12,17 @@ coordinates = []
 for path in paths:
     for segment in path:
         # Dividir segmentos em partes menores (ex.: curvas)
-        points = [segment.point(t) for t in np.linspace(0, 1, num=100)]  # Ajuste o num conforme necessário
+        points = [segment.point(t) for t in np.linspace(0, 1, num=1000)] 
         for point in points:
             coordinates.append((point.real, point.imag))  # Ponto real e imaginário representam X e Y
 
 # Lista de pontos
 # Convertendo para numpy array
 coordinates = np.array(coordinates)
-coordinates = coordinates/7
+coordinates = coordinates/4
 coordinates[:, 1] = coordinates[:, 1] * -1
-coordinates[:,0] -= 0
+
+coordinates[:,0] += 60
 print("Coordenadas extraídas:")
 print(coordinates)
 
@@ -143,8 +144,8 @@ def update(frame):
     return ponto_C_plot, linha_rastro, segmento_AC, segmento_BC, texto_AC, texto_BC
 
 # Definindo os pontos A e B
-A = np.array([0, 0])  # Ponto A
-B = np.array([100, 0])  # Ponto B
+A = np.array([0, 0])
+B = np.array([243.2, 0])
 
 num_pontos = len(coordinates)  # Número de pontos a serem animados
 # Inicializando as listas para o rastro e os gráficos de r1 e r2
@@ -155,17 +156,17 @@ r1_vals, r2_vals = [], []
 fig, (ax_main, ax_r1, ax_r2) = plt.subplots(1, 3, figsize=(15, 5))
 
 # Configuração do gráfico principal
-ax_main.set_xlim(-30, 130)
-ax_main.set_ylim(-120, 10)
+ax_main.set_xlim(-10, 260)
+ax_main.set_ylim(-250, 10)
 ax_main.set_aspect('equal', 'box')
-ax_main.set_title("Trajetória Circunferência PI7")
+ax_main.set_title("Trajetória Personalizada PI7")
 ax_main.set_xlabel("X")
 ax_main.set_ylabel("Y")
 ax_main.grid(True)
 
 # Plotando os pontos A e B
 ax_main.plot(A[0], A[1], 'go', label='A (0, 0)')
-ax_main.plot(B[0], B[1], 'bo', label='B (100, 0)')
+ax_main.plot(B[0], B[1], 'bo', label='B (10, 0)')
 
 # Inicializando o ponto C, o rastro e os segmentos AC e BC
 ponto_C_plot, = ax_main.plot([], [], 'mo', label='Ponto C')
@@ -184,7 +185,7 @@ ax_r2.set_xlim(0, num_pontos)
 ax_r2.set_ylim(0, 30)
 
 # Função de animação
-ani = FuncAnimation(fig, update, frames=num_pontos, interval=100, blit=False)
+ani = FuncAnimation(fig, update, frames=num_pontos, interval=30, blit=False)
 
 # Exibindo o gráfico
 plt.tight_layout()

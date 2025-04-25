@@ -97,13 +97,14 @@ def update(frame):
     
     return ponto_C_plot, linha_rastro, segmento_AC, segmento_BC, texto_AC, texto_BC
 
-# Definindo os pontos A e B (onde serão fixados os motores)
-A = np.array([0, 0]) 
-B = np.array([100, 0]) 
 
-# Centro e raio da circunferência
-centro = (50, -50) 
-raio = 25
+# Definindo A e B
+A = np.array([0, 0])
+B = np.array([243.2, 0])
+
+# Adicionando a circunferência
+centro = (243.2/2, -100)  # Centro da circunferência
+raio = 80  # Raio da circunferência
 
 # Gerando os pontos da circunferência
 num_pontos = 40
@@ -116,9 +117,9 @@ r1_vals, r2_vals = [], []
 # Inicializando a figura e os eixos
 fig, (ax_main, ax_r1, ax_r2) = plt.subplots(1, 3, figsize=(15, 5))
 
-# Configuração do gráfico principal
-ax_main.set_xlim(-30, 130)
-ax_main.set_ylim(-100, 10)
+# Ajustando limites do gráfico
+ax_main.set_xlim(-10, 260)
+ax_main.set_ylim(-250, 10)
 ax_main.set_aspect('equal', 'box')
 ax_main.set_title("Trajetória Circunferência PI7")
 ax_main.set_xlabel("X (cm)")
@@ -126,8 +127,8 @@ ax_main.set_ylabel("Y (cm)")
 ax_main.grid(True)
 
 # Plotando os pontos A e B
-ax_main.plot(A[0], A[1], 'go', label='A (0, 0)')
-ax_main.plot(B[0], B[1], 'bo', label='B (100, 0)')
+ax_main.plot(A[0], A[1], 'go', label='A')
+ax_main.plot(B[0], B[1], 'bo', label='B')
 
 # Inicializando o ponto C, o rastro e os segmentos AC e BC
 ponto_C_plot, = ax_main.plot([], [], 'mo', label='Ponto C')
