@@ -86,8 +86,8 @@ def update(frame):
     ax_r2.clear()
     
     # Plotando os raios r1 e r2 ao longo do tempo
-    ax_r1.plot(range(len(r1_vals)), r1_vals, label="r1")
-    ax_r2.plot(range(len(r2_vals)), r2_vals, label="r2")
+    ax_r1.scatter(range(len(r1_vals)), r1_vals, label="r1")
+    ax_r2.scatter(range(len(r2_vals)), r2_vals, label="r2")
     
     ax_r1.set_title("Comprimento r1")
     ax_r2.set_title("Comprimento r2")

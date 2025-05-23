@@ -12,7 +12,7 @@ coordinates = []
 for path in paths:
     for segment in path:
         # Dividir segmentos em partes menores (ex.: curvas)
-        points = [segment.point(t) for t in np.linspace(0, 1, num=1000)] 
+        points = [segment.point(t) for t in np.linspace(0, 1, num=300)] 
         for point in points:
             coordinates.append((point.real, point.imag))  # Ponto real e imaginário representam X e Y
 
@@ -108,7 +108,15 @@ def update(frame):
     r2_vals.append(r2)
     
     # Traçar o ponto C (com rastro)
-    
+    if len(rastro_x) > 0:
+        ultima_pos = np.array([rastro_x[-1], rastro_y[-1]])
+        nova_pos = np.array([x_C, y_C])
+        distancia = np.linalg.norm(nova_pos - ultima_pos)
+        
+        if distancia > 10:  # limite para detectar um "salto"
+            rastro_x.append(np.nan)
+            rastro_y.append(np.nan)
+
     rastro_x.append(x_C)
     rastro_y.append(y_C)
     linha_rastro.set_data(rastro_x, rastro_y)
@@ -133,8 +141,8 @@ def update(frame):
     ax_r2.clear()
     
     # Plotando os raios r1 e r2 ao longo do tempo
-    ax_r1.plot(range(len(r1_vals)), r1_vals, label="r1")
-    ax_r2.plot(range(len(r2_vals)), r2_vals, label="r2")
+    ax_r1.scatter(range(len(r1_vals)), r1_vals, label="r1")
+    ax_r2.scatter(range(len(r2_vals)), r2_vals, label="r2")
     
     ax_r1.set_title("Comprimento r1")
     ax_r2.set_title("Comprimento r2")
