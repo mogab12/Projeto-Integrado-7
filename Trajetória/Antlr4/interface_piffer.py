@@ -60,7 +60,7 @@ class InterfaceGCode:
         if self.arquivo_path:
             self.status_label.config(text="Arquivo selecionado. Gerando pontos...", fg="purple")
             try:
-                subprocess.run(["python", "mainang.py", self.arquivo_path], check=True)
+                subprocess.run(["python", "main.py", self.arquivo_path], check=True)
                 self.status_label.config(text="Pontos gerados com sucesso.", fg="darkgreen")
                 self.pontos_enviados = False
             except Exception as e:
